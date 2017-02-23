@@ -44,6 +44,8 @@ to_bemanipulate.append(module_manipulate(module_name = 'muons1stStep', manipulat
 to_bemanipulate.append(module_manipulate(module_name = 'gedGsfElectronsTmp', manipulator_name = "GsfElectron", steps = ["SIM", "MERGE"]))
 to_bemanipulate.append(module_manipulate(module_name = 'gedPhotonsTmp', manipulator_name = "Photon", steps = ["SIM", "MERGE"]))
 to_bemanipulate.append(module_manipulate(module_name = 'particleFlowTmp', manipulator_name = "PF", steps = ["SIM", "MERGE"], instance=["","CleanedHF","CleanedCosmicsMuons","CleanedTrackerAndGlobalMuons","CleanedFakeMuons","CleanedPunchThroughMuons","CleanedPunchThroughNeutralHadrons","AddedMuonsAndHadrons"]))
+to_bemanipulate.append(module_manipulate(module_name = 'gedGsfElectrons', manipulator_name = "GsfElectron", steps = ["SIM", "MERGE"]))
+to_bemanipulate.append(module_manipulate(module_name = 'gedPhotons', manipulator_name = "Photon", steps = ["SIM", "MERGE"]))
 
 
 to_bemanipulate.append(module_manipulate(module_name = 'ecalRecHit', manipulator_name = "EcalRecHit", instance= ["EcalRecHitsEB","EcalRecHitsEE"]))
@@ -352,6 +354,51 @@ def customiseMerging(process, changeProcessname=True,reselect=False):
 	
 	process = customisoptions(process) 
 	return modify_outputModules(process, [keepMerged(dataTier)])
+      
+      
+def customiseMergingnew(process, changeProcessname=True,reselect=False):
+	if changeProcessname:
+		process._Process__name = "MERGE"
+	if reselect:
+		dataTier="RESELECT"
+	else:
+		dataTier="SELECT"
+
+
+	process.source.inputCommands = cms.untracked.vstring()
+	process.source.inputCommands.append("keep *_*_*_*")
+
+	
+	process.merge_step = cms.Path()
+
+
+	for akt_manimod in to_bemanipulate:
+		if "MERGE" in akt_manimod.steps:
+	#if akt_manimod.module_name != 'particleFlowTmp':
+	#  continue
+			print akt_manimod.module_name
+			mergCollections_in = cms.VInputTag()
+			for instance in akt_manimod.instance:
+				mergCollections_in.append(cms.InputTag(akt_manimod.merge_prefix+akt_manimod.module_name,instance,"SIMembedding"))
+				mergCollections_in.append(cms.InputTag(akt_manimod.merge_prefix+akt_manimod.module_name,instance,"LHEembeddingCLEAN"))##  Mayb make some process history magic which finds out if it was CLEAN or LHEembeddingCLEAN step
+			setattr(process, akt_manimod.module_name, cms.EDProducer(akt_manimod.merger_name,
+								 mergCollections = mergCollections_in
+								 )
+			)
+			process.merge_step +=getattr(process, akt_manimod.module_name)
+
+
+
+
+	process.load('CommonTools.ParticleFlow.genForPF2PAT_cff')
+		
+	process.merge_step += process.genForPF2PATSequence
+	
+	process.schedule.insert(0,process.merge_step)
+	 # process.load('PhysicsTools.PatAlgos.slimming.slimmedGenJets_cfi')
+	
+	process = customisoptions(process) 
+	return modify_outputModules(process, [keepMerged(dataTier)])
 
 def customiseMerging_Reselect(process, changeProcessname=True):
 	return customiseMerging(process, changeProcessname=changeProcessname, reselect=True)
@@ -373,6 +420,11 @@ def customisoptions(process):
 	if not hasattr(process, "options"): 
 	  process.options = cms.untracked.PSet()
 	process.options.emptyRunLumiMode = cms.untracked.string('doNotHandleEmptyRunsAndLumis')	
+
+	if not hasattr(process, "bunchSpacingProducer"):
+	  process.bunchSpacingProducer = cms.EDProducer("BunchSpacingProducer")
+	process.bunchSpacingProducer.bunchSpacingOverride = cms.uint32(25)
+	process.bunchSpacingProducer.overrideBunchSpacing = cms.bool(True)
 	return process
 
 ############################### MC specific Customizer ###########################
