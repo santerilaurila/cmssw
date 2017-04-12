@@ -431,9 +431,24 @@ def customisoptions(process):
 
 def customiseFilterZToMuMu(process):
 	process.load("TauAnalysis.MCEmbeddingTools.DYToMuMuGenFilter_cfi")
-	process.ZToMuMuFilter = cms.Path(process.dYToMuMuGenFilter)
-	process.schedule.insert(-1,process.ZToMuMuFilter)
+	process.MCFilter = cms.Path(process.dYToMuMuGenFilter)
+	return customiseMCFilter(process)
+
+def customiseFilterTTbartoMuMu(process):
+	process.load("TauAnalysis.MCEmbeddingTools.TTbartoMuMuGenFilter_cfi")
+	process.MCFilter = cms.Path(process.TTbartoMuMuGenFilter)
+	return customiseMCFilter(process)
+
+def customiseMCFilter(process):
+	process.schedule.insert(-1,process.MCFilter)
+	outputModulesList = [key for key,value in process.outputModules.iteritems()]
+	for outputModule in outputModulesList:
+		outputModule = getattr(process, outputModule)
+		outputModule.SelectEvents = cms.untracked.PSet(SelectEvents = cms.vstring("MCFilter"))
 	return process
+
+
+
       
       
       

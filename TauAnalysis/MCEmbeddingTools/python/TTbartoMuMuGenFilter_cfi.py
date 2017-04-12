@@ -2,7 +2,7 @@ import FWCore.ParameterSet.Config as cms
 
 
 TTbartoMuMuGenFilter = cms.EDFilter("TTbartoMuMuGenFilter", 
-                              inputTag = cms.InputTag("prunedGenParticles"))
+                              inputTag = cms.InputTag("genParticles"))
 
 
 
