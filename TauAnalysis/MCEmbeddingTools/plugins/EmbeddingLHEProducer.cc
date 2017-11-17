@@ -336,7 +336,7 @@ void EmbeddingLHEProducer::fill_lhe_with_particle(lhef::HEPEUP &outlhe, TLorentz
       
     }
     
-    if (std::abs(pdgid) == 15){ 
+    if (std::abs(pdgid) == 15 || std::abs(pdgid) == 13){ 
      outlhe.MOTHUP[particleindex].first = 1;  // Mother is the Z (first partile)
      outlhe.MOTHUP[particleindex].second = 1; // Mother is the Z (first partile)
      
