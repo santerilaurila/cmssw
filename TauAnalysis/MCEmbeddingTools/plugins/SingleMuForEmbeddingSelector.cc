@@ -66,9 +66,11 @@ class SingleMuForEmbeddingSelector : public edm::EDFilter {
         int nPassedMuSelection;
         int nPassedMuVeto;
         int nPassedJetSelection;
-        //int nPassedDeltaR;
+//        int nPassedMuonJetOverlapCheck;
         int nPassedMETSelection;
         int nSelectedEvents;
+        
+        std::string outputString;
 };
 
 SingleMuForEmbeddingSelector::SingleMuForEmbeddingSelector(const edm::ParameterSet& iConfig):
@@ -88,9 +90,10 @@ SingleMuForEmbeddingSelector::SingleMuForEmbeddingSelector(const edm::ParameterS
   nPassedMuSelection(0),
   nPassedMuVeto(0),
   nPassedJetSelection(0),
-  //nPassedDeltaR(0),
+//  nPassedMuonJetOverlapCheck(0),
   nPassedMETSelection(0),
-  nSelectedEvents(0)
+  nSelectedEvents(0),
+  outputString("")
 {
   
 }
@@ -99,12 +102,13 @@ SingleMuForEmbeddingSelector::SingleMuForEmbeddingSelector(const edm::ParameterS
 SingleMuForEmbeddingSelector::~SingleMuForEmbeddingSelector(){
     double eff = 0;
     if(nEvents > 0) eff = ((double)nSelectedEvents)/((double) nEvents);
+//    std::cout << outputString << std::endl;
     std::cout << "SingleMuForEmbeddingSelector: "
               << "\n Number of events read: " << nEvents
               << "\n Passed mu selection  : " << nPassedMuSelection
               << "\n Passed >1 mu veto    : " << nPassedMuVeto
               << "\n Passed jet selection : " << nPassedJetSelection
-              //<< "\n Passed DeltaR(mu,jet): " << nPassedDeltaR
+//              << "\n Passed DeltaR(mu,jet): " << nPassedMuonJetOverlapCheck
               << "\n Passed MET selection : " << nPassedMETSelection
               << "\n Number of events kept: " << nSelectedEvents
               << "\n Total efficiency     : " << eff << std::endl;
@@ -153,20 +157,31 @@ bool SingleMuForEmbeddingSelector::filter(edm::Event& iEvent, const edm::EventSe
     nPassedMuVeto++;
 
     // Jet selection
+//    bool muonOverlapsWithJet = false;
     edm::Handle<edm::View<pat::Jet> > jethandle;
     iEvent.getByToken(jetToken, jethandle);
     int nJets = 0;
     if(jethandle.isValid()){
         for(size_t i=0; i<jethandle->size(); ++i) {
             const pat::Jet& obj = jethandle->at(i);
-	    if(obj.p4().pt() < fJetPtCut) continue;
-	    if(fabs(obj.p4().eta()) > fJetEtaCut) continue;
-	    if(deltaR(obj,tightMuon) < 0.1) continue;
+            if(obj.p4().pt() < fJetPtCut) continue;
+	        if(fabs(obj.p4().eta()) > fJetEtaCut) continue;
+//            std::string s;
+//            s = "Checking jet"+std::to_string(i)+" with pT="+std::to_string(obj.p4().pt())+", DeltaR(obj,tightMuon)="+std::to_string(deltaR(obj,tightMuon))+"\n";
+//            outputString += s;
+	        if(deltaR(obj,tightMuon) < 0.1){
+//              muonOverlapsWithJet = true;   
+	          continue;
+	        } 
 	    nJets++;
 	}
     }
     if(nJets < nJetsCut) return false;
     nPassedJetSelection++;
+
+// There is one "jet" corresponding to each muon so this does not work!
+//    if(muonOverlapsWithJet) return false;
+//    nPassedMuonJetOverlapCheck++;
 
     // MET cut
     edm::Handle<edm::View<pat::MET>> methandle;                                                                                                                                                    

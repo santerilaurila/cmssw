@@ -26,7 +26,8 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-    fileNames = cms.untracked.vstring('file:step3a_output_simulated_and_cleaned_inAODSIM.root'),
+#    fileNames = cms.untracked.vstring('file:step3a_output_simulated_and_cleaned_inAODSIM.root'),
+    fileNames = cms.untracked.vstring('file:/eos/user/s/slaurila/data/embedding_plot_inputs/step3a_output_simulated_and_cleaned_inAODSIM_1200events.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -53,7 +54,8 @@ process.MINIAODSIMoutput = cms.OutputModule("PoolOutputModule",
     dropMetaData = cms.untracked.string('ALL'),
     eventAutoFlushCompressedSize = cms.untracked.int32(15728640),
     fastCloning = cms.untracked.bool(False),
-    fileName = cms.untracked.string('file:step3a_output_simulated_and_cleaned_inMINIAOD.root'),
+#    fileName = cms.untracked.string('file:step3a_output_simulated_and_cleaned_inMINIAOD.root'),
+    fileName = cms.untracked.string('file:/eos/user/s/slaurila/data/embedding_plot_inputs/step3a_output_simulated_and_cleaned_inMINIAOD_1200events.root'),
     outputCommands = process.MINIAODSIMEventContent.outputCommands,
     overrideInputFileSplitLevels = cms.untracked.bool(True)
 )

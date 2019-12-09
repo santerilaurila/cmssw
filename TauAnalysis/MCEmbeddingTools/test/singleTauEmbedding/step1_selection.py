@@ -24,24 +24,25 @@ process.load('Configuration.StandardSequences.EndOfProcess_cff')
 process.load('Configuration.StandardSequences.FrontierConditions_GlobalTag_cff')
 
 process.maxEvents = cms.untracked.PSet(
-    input = cms.untracked.int32(10000)
-#    input = cms.untracked.int32(-1)
+#    input = cms.untracked.int32(100)
+    input = cms.untracked.int32(-1)
 )
 
 # Input source
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring(
-        '/store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/92E42FCE-4283-E611-BABE-02163E012A07.root',
-        '/store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/A236B0D8-2D83-E611-B2D4-02163E013620.root',
-        '/store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/AA3A43D1-2C83-E611-A47D-FA163E09D143.root',
-        '/store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/AAD906ED-3083-E611-B6DA-02163E01259E.root'),
-#        '/store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A510AD3-7662-E611-836E-02163E0146AB.root',
-#        '/store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A63ACF1-7162-E611-A283-02163E0145AC.root',
-#        '/store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A8787A2-7662-E611-A262-02163E011D9F.root',
-#        '/store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A98CA2B-7662-E611-97A0-02163E01224A.root',
-#        '/store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1AAB8E45-7162-E611-9327-02163E011DE2.root',
-#        '/store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1AC15B65-7362-E611-AC89-02163E01443F.root'),
-#    fileNames = cms.untracked.vstring('/store/data/Run2016H/DoubleMuon/RAW/v1/000/283/830/00000/E2A70B44-E49A-E611-B10B-02163E0135B9.root'),
+#        'root://cmsxrootd.fnal.gov//store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/92E42FCE-4283-E611-BABE-02163E012A07.root',
+        'root://cmsxrootd.fnal.gov//store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/A236B0D8-2D83-E611-B2D4-02163E013620.root',
+        'root://cmsxrootd.fnal.gov//store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/AA3A43D1-2C83-E611-A47D-FA163E09D143.root',
+        'root://cmsxrootd.fnal.gov//store/data/Run2016H/SingleMuon/RAW/v1/000/281/616/00000/AAD906ED-3083-E611-B6DA-02163E01259E.root'),
+#        'root://cmsxrootd.fnal.gov//store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A510AD3-7662-E611-836E-02163E0146AB.root',),
+#        'root://cmsxrootd.fnal.gov//store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A63ACF1-7162-E611-A283-02163E0145AC.root',
+#        'root://cmsxrootd.fnal.gov//store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A8787A2-7662-E611-A262-02163E011D9F.root',
+#        'root://cmsxrootd.fnal.gov//store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1A98CA2B-7662-E611-97A0-02163E01224A.root',
+#        'root://cmsxrootd.fnal.gov//store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1AAB8E45-7162-E611-9327-02163E011DE2.root',
+#        'root://cmsxrootd.fnal.gov//store/data/Run2016G/SingleMuon/RAW/v1/000/278/820/00000/1AC15B65-7362-E611-AC89-02163E01443F.root'),
+#    fileNames = cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/data/Run2016H/DoubleMuon/RAW/v1/000/283/830/00000/E2A70B44-E49A-E611-B10B-02163E0135B9.root'),
+#    fileNames = cms.untracked.vstring('root://cmsxrootd.fnal.gov//store/data/Run2016H/DoubleMuon/RAW/v1/000/283/830/00000/E2A70B44-E49A-E611-B10B-02163E0135B9.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 

@@ -9,7 +9,8 @@ singleMuonHLTTrigger = cms.EDFilter("TriggerResultsFilter",
     hltResults = cms.InputTag("TriggerResults","","HLT"),
     l1tResults = cms.InputTag(""),
     throw = cms.bool(False),
-    triggerConditions = cms.vstring("HLT_IsoMu27_*") # unprescaled
+#    triggerConditions = cms.vstring("HLT_IsoMu27_*") # unprescaled, simple approach: ~37% of SingleMu events pass
+    triggerConditions = cms.vstring("HLT_IsoMu24_* OR HLT_IsoTkMu24_v* OR HLT_Mu50_v*") # unprescaled, following HIG-14-023 leptonic analysis, ~48% of SingleMu events pass
 #    triggerConditions = cms.vstring("HLT_Mu27_*") # avoids biases but was unprescaled at some point
 #    triggerConditions = cms.vstring("HLT_Mu50*") # lowest unprescaled non-isolated single muon trigger
 #    triggerConditions = cms.vstring("HLT_Mu45_eta2p1_*") # was prescaled at some point, might lead to bias around eta=2.1
@@ -27,11 +28,11 @@ skimForSingleMuonEmbedding = cms.EDFilter("SingleMuForEmbeddingSelector",
     MuonVetoPtCut = cms.double(20.0),
     MuonVetoEtaCut = cms.double(2.5),
     JetCollection = cms.InputTag("slimmedJets"),
-    JetPtCut = cms.double(20.0),
+    JetPtCut = cms.double(25.0),
     JetEtaCut = cms.double(5.0),
-    NJetsCut = cms.int32(3),
+    NJetsCut = cms.int32(2),
     METCollection = cms.InputTag("slimmedMETs"),
-    METCut = cms.double(70.0)
+    METCut = cms.double(0.0)
 )
 
 selectedMuonForSingleMuonEmbedding = cms.EDProducer("SingleMuForEmbeddingProducer",

@@ -29,12 +29,32 @@ process.maxEvents = cms.untracked.PSet(
 # Input source
 process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring('file:step1_output_RAWskimmed.root'),
-#    fileNames = cms.untracked.vstring('file:RAWskimmed_171114_10k.root'),
+#    fileNames = cms.untracked.vstring('file:/eos/user/s/slaurila/data/embedding_plot_inputs/step1_output_RAWskimmed_3688.root'),
+#    fileNames = cms.untracked.vstring('file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_292.root',
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_310.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_382.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_349.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_391.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_385.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_404.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_351.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_387.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_415.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_396.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_478.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_386.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_422.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_473.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_417.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_286.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_423.root',    
+#                                      'file:multicrab_step1_selection_TEST/multicrab_step1_selection_v8026p1_20171220T1640/crab_SingleMuon_Run2016H_v1_281010_281202/results/step1_output_RAWskimmed_406.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
 process.options = cms.untracked.PSet(
     allowUnscheduled = cms.untracked.bool(True)
+
 )
 
 # Production Info
