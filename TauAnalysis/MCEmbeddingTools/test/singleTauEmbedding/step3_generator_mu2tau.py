@@ -41,7 +41,7 @@ process.source = cms.Source("PoolSource",
     fileNames = cms.untracked.vstring('file:step2_output_lhe_and_cleaned.root'),
 #    fileNames = cms.untracked.vstring('file:/eos/user/s/slaurila/data/embedding_plot_inputs/step2_output_lhe_and_cleaned.root'),
 #    fileNames = cms.untracked.vstring(
-#        'root://cmsxrootd.fnal.gov//store/user/slaurila/CRAB3_TransferData/multicrab_step2a_lheprodandcleaning_mu2tau_v8026p1_20190731T1855/SingleMuon/crab_slaurila-crab_SingleMuon_Run2016H_v1__try1/190731_165649/0002/step2_output_lhe_and_cleaned_2590.root'), #TEMPORARILY MODIFIED
+#        'root://cmsxrootd.fnal.gov//store/user/slaurila/CRAB3_TransferData/multicrab_step2a_lheprodandcleaning_mu2tau_v8026p1_20190731T1855/SingleMuon/crab_slaurila-crab_SingleMuon_Run2016H_v1__try1/190731_165649/0002/step2_output_lhe_and_cleaned_2590.root'), 
 
     inputCommands = cms.untracked.vstring('keep *', 
         'drop LHEXMLStringProduct_*_*_*', 
@@ -88,7 +88,6 @@ process.RAWRECOoutput = cms.OutputModule("PoolOutputModule",
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(5242880),
     fileName = cms.untracked.string('step3a_output_simulated_and_cleaned.root'),
-#    fileName = cms.untracked.string('/eos/user/s/slaurila/data/embedding_plot_inputs/step3a_output_simulated_and_cleaned.root'), #TEMPORARILY MODIFIED
     outputCommands = process.RAWRECOEventContent.outputCommands,
     splitLevel = cms.untracked.int32(0)
 )
@@ -105,7 +104,6 @@ process.AODSIMoutput = cms.OutputModule("PoolOutputModule",
     ),
     eventAutoFlushCompressedSize = cms.untracked.int32(15728640),
     fileName = cms.untracked.string('step3a_output_simulated_and_cleaned_inAODSIM.root'),
-#    fileName = cms.untracked.string('/eos/user/s/slaurila/data/embedding_plot_inputs/step3a_output_simulated_and_cleaned_inAODSIM.root'), #TEMPORARILY MODIFIED
     outputCommands = process.AODSIMEventContent.outputCommands
 )
 

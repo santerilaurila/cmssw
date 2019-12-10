@@ -26,8 +26,7 @@ process.maxEvents = cms.untracked.PSet(
 
 # Input source
 process.source = cms.Source("PoolSource",
-#    fileNames = cms.untracked.vstring('file:step3a_output_simulated_and_cleaned.root'), #TEMPORARILY CHANGED
-    fileNames = cms.untracked.vstring('file:/eos/user/s/slaurila/data/embedding_plot_inputs/step3a_output_simulated_and_cleaned_1200events.root'),
+    fileNames = cms.untracked.vstring('file:step3a_output_simulated_and_cleaned.root'),
     secondaryFileNames = cms.untracked.vstring()
 )
 
@@ -54,8 +53,7 @@ process.MINIAODSIMoutput = cms.OutputModule("PoolOutputModule",
     dropMetaData = cms.untracked.string('ALL'),
     eventAutoFlushCompressedSize = cms.untracked.int32(15728640),
     fastCloning = cms.untracked.bool(False),
-#    fileName = cms.untracked.string('file:step5_output_merged_600events.root'),
-    fileName = cms.untracked.string('file:/eos/user/s/slaurila/data/embedding_plot_inputs/step5_output_merged_1200events.root'), #TEMPORARITY CHANGED
+    fileName = cms.untracked.string('file:step5_output_merged.root'),
     outputCommands = process.MINIAODSIMEventContent.outputCommands,
     overrideInputFileSplitLevels = cms.untracked.bool(True)
 )
